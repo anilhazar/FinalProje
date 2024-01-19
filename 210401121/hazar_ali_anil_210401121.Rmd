@@ -1,0 +1,11 @@
+---
+title: "Proje Rapor: Ali Anıl Hazar 210401121"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+# Q1 : Problem Tanımı
+
+Kırsal kesimde yer alan öğrenciler, eğitimde karşılaştıkları zorluklar nedeniyle dezavantajlı bir konumda bulunmaktadır. Eğitim kalitesindeki düşük seviye ve eğitime erişimdeki sorunlar, bu öğrencilerin akademik başarılarını ve genel yaşam kalitelerini olumsuz bir şekilde etkilemektedir. Bu durumun temelinde çeşitli faktörler bulunmaktadır. Kırsal bölgelerdeki eğitimdeki eşitsizlik, ekonomik koşullar, altyapı eksiklikleri ve sosyal faktörler gibi etkenler bir araya gelerek öğrencilerin eğitimine yönelik engeller oluşturmaktadır. Bu kompleks sorunların etkili bir şekilde çözülebilmesi için detaylı bir veri analizi zorunlu hale gelmektedir. Bu analiz, kırsal kesimdeki öğrencilerin eğitim deneyimlerini daha iyi anlamamıza ve çözüm önerileri geliştirmemize olanak tanıyacaktır.
