@@ -273,7 +273,48 @@ grid.arrange(plot_weighted_average_grade, plot_travel_time, plot_internet_access
 ```
  
 
+ 
+# Q6: Veri Analizi
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Veri setindeki eksik değerleri doldur (örneğin, ortalama notlar)
+merged_data[is.na(merged_data)] <- 0
+
+# Gruplandırma ve filtreleme işlemleri
+# Benzer çalışma sürelerine sahip öğrencileri filtreleyip, adres türü, internet erişimi ve ağırlıklı ortalamaya göre gruplandırıyoruz.
+# Daha sonra, her grup için ortalama seyahat süresini hesaplıyoruz.
+similar_study_time_groups <- merged_data %>%
+  filter(study_time.x == study_time.y) %>%
+  group_by(address_type.x, internet_access.x, weighted_average_grade) %>%
+  summarise(avg_travel_time = mean(as.integer(travel_time.x)))
+
+# Tablo 1: Adres Türüne ve Internet Erişimine Göre Benzer Çalışma Sürelerine Sahip Fakat Farklı Notlar Alan Öğrencilerin İncelenmesi
+# Bu tablo, benzer çalışma sürelerine sahip ancak farklı notlar alan öğrencilerin adres türüne ve internet erişim durumlarına göre incelenmesini göstermektedir.
+cat("Benzer Çalışma Sürelerine Sahip Ancak Farklı Sınıflarda Okuyan Öğrencilerin Adres Türü ve İnternet Erişimine  Göre İncelenmesi\n")
+head(head(similar_study_time_groups))
+
+# Grafik 1: Benzer çalışma sürelerine sahip kırsal ve kentsel öğrencilerin ortalama seyahat süreleri karşılaştırılması
+### Bu grafik, benzer çalışma sürelerine sahip olan ancak farklı adres türlerinde yaşayan öğrencilerin ortalama seyahat sürelerini karşılaştırır.
+plot_travel_time_difference <- ggplot(similar_study_time_groups, aes(x = address_type.x, y = avg_travel_time, color = address_type.x)) +
+  geom_point(position = position_jitter(width = 0.2), size = 2) +
+  labs(title = "Travel Times of Students", x = "Address Type", y = "Average Travel Time") +
+  theme_minimal()
+
+# Grafik 2: Adres Türüne ve Internet Erişimine Göre Benzer Çalışma Sürelerine Sahip Fakat Farklı Notlar Alan Öğrencilerin Internet Erişim Durumları Karşılaştırılması
+# Bu grafik, benzer çalışma sürelerine sahip ancak farklı notlar alan öğrencilerin adres türüne ve internet erişim durumlarına göre dağılımını gösterir.
+plot_internet_access_difference <- ggplot(similar_study_time_groups, aes(x = address_type.x, fill = internet_access.x)) +
+  geom_bar(stat = "count", position = position_dodge()) +
+  labs(title = "Distribution Internet Access", x = "Address Type", y = "Count", fill = "Internet Access") +
+  theme_minimal()
+
+# Grafikleri düzenleyerek birleştirelim
+grid.arrange(plot_travel_time_difference, plot_internet_access_difference, ncol = 2)
+
+
+```
+
+
 
 ```{r test_chunk, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-testthat::test_file("tests/Q5_tests_ali_anil_hazar_210401121.R")
+testthat::test_file("tests/Q6_tests_ali_anil_hazar_210401121.R")
 ```
