@@ -313,6 +313,25 @@ grid.arrange(plot_travel_time_difference, plot_internet_access_difference, ncol 
 
 ```
 
+# Q7 : Sonuç değerlendirme, tavsiyeler
+
+-Bu projede, kırsal ve kentsel alanlarda yaşayan öğrencilerin akademik performansları arasındaki farklılıkları detaylı bir şekilde analiz ettik. Amacımız, çevik prensiplere uygun bir yaklaşımla, bu farklılıkların temel nedenlerini belirleyerek hükümete etkili çözüm önerileri sunmaktı.
+
+-Q4 aşamasının ardından projeden sorumlu hükümet görevlileri ile gerçekleştirdiğimiz bir görüşme sonucunda, eğitmen ve psikologların ortak kararı doğrultusunda öğrencilerin başarılarını ölçerken sadece sayısal bir dersin değil, aynı zamanda sözel bir dersin verilerini de dahil etmemiz gerektiği belirlendi. Bu karar, öğrencilerin başarılarını daha kapsamlı bir şekilde değerlendirmemize olanak tanıdı.
+
+-Çevik prensiplere uygun bir biçimde yönetilen projemize yeni bir veri seti eklemek, esnek ve hızlı bir şekilde uygulanabilen çevik yazılım yaklaşımımızla oldukça uyumlu oldu. Bu yeni veri seti, sadece sayısal bir perspektifle değil, aynı zamanda sözel yetenekleri de içererek daha geniş bir bakış açısı sunmamıza olanak sağladı.
+
+-Bu gelişme, projemizin daha kapsamlı ve çeşitli bir analiz yapabilme yeteneğini artırdı. Artık sadece matematik dersi üzerinden değil, aynı zamanda sözel bir dersin verileri üzerinden de öğrenci performansını değerlendirebiliyoruz. Bu, elde ettiğimiz sonuçların daha geniş bir perspektifle değerlendirilmesine ve çözüm önerilerinin daha etkili bir şekilde geliştirilmesine olanak tanıdı.
+
+-Proje kapsamında, öğrencilerin Portekizce ve Matematik derslerindeki not ortalamalarını kullanarak %30 vize ve %40 final ağırlıklı bir karşılaştırma gerçekleştirdik. Çalışma süreleri benzer olan öğrencileri seçerek adil bir karşılaştırma yapmaya özen gösterdik.
+
+-Elde ettiğimiz sonuçlar, öğrencilerin akademik performansı üzerinde internet erişiminin belirgin bir etkisi olmadığını, ancak eğitime ulaşım süresinin önemli bir faktör olduğunu gösterdi. Bu durum eğitimde fırsat eşitliğinin sağlanması için çok kritik bir rol oynuyor.
+
+-Çevik prensiplere uygun olarak, projemizi hızlı ve etkili bir şekilde yönettik. Elde ettiğimiz verileri kullanarak çözüm odaklı analizler gerçekleştirdik. Sonuçlar, kırsal alanda yaşayan öğrencilerin eğitime ulaşım sorunlarına çözüm bulunması gerektiğini ortaya koydu. Bu, çevik bir yaklaşımla hızlı bir şekilde uygulanabilecek ve maliyeti düşük bir çözüm olarak öne çıkıyor. Bu noktada, hükümetin bu soruna yönelik adımlar atması önem arz etmektedir.
+
+-Projemizin güçlü yönü, geniş veri seti üzerinde yapılan detaylı analizdir. Ancak, sınırlı sayıda dersin notlarını içermesi projenin zayıf yönü olarak göze çarpıyor. Gelecekte, daha kapsamlı bir analiz için daha fazla dersin dahil edilmesi ve diğer faktörlerin (örneğin, öğretmen kalitesi, okul donanımı) incelenmesi önerilmektedir."
+
+------------------------------------------------------------------------------------------------------------------------
 
 
 ```{r test_chunk, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
