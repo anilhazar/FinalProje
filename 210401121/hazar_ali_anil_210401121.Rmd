@@ -13,3 +13,51 @@ Kırsal kesimde yer alan öğrenciler, eğitimde karşılaştıkları zorluklar 
 # Q2 : Proje Amacı
 
 Toplumsal bir sorun olarak belirlenen kırsal kesimdeki öğrencilerin eğitimdeki dezavantajlı durumunu ele almak üzere hükümetle ortak bir çalışma başlatılmıştır. Şirketimiz, eğitim ve öğrenci verilerini detaylı bir şekilde analiz ederek bu soruna etkili çözümler üretecektir. Projede ele alınacak çok sayıda faktörün analizi sayesinde, sorunun temel nedenleri belirlenecek ve hükümete sunulacak öneriler, maksimum etki yaratmak ve çözümü en etkili şekilde uygulamak için tasarlanacaktır. Bu kapsamlı analiz, eğitimdeki dezavantajları en aza indirmeyi hedefleyerek, kırsal kesimdeki öğrencilerin akademik ve sosyal hayatlarını olumlu yönde etkilemeyi amaçlamaktadır.
+
+
+# Q3 : Veri Seti Keşifsel Analizi
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(readr)
+# Veri setini okuma
+mathDF <- read.csv("C:/Users/alian/Desktop/210401121/210401121/student_math_data.csv")
+portugueseDF <- read.csv("C:/Users/alian/Desktop/210401121/210401121/student_portuguese_data.csv")
+
+# Veri setinin ilk birkaç satırını gösterme
+cat("Matematik Dersi Alan Öğrencilerin Veri Kümesi:\n")
+head(mathDF)
+cat("\nPortekizce Dersi Alan Öğrencilerin Veri Kümesi:\n")
+head(portugueseDF)
+
+# Veri seti hakkında genel bilgiler
+cat("\nMatematik Dersi Veri Seti Bilgileri:\n")
+str(mathDF)
+cat("\nPortekizce Dersi Veri Seti Bilgileri:\n")
+str(portugueseDF)
+
+# Veri seti hakkında istatistiksel bilgiler
+cat("\nMatematik Dersi Veri Seti İstatistiksel Bilgiler:\n")
+summary(mathDF)
+cat("\nPortekizce Dersi Veri Seti İstatistiksel Bilgiler:\n")
+summary(portugueseDF)
+
+
+# Veri setindeki problemli satırları kontrol etme
+cat("\nMatematik Dersi Tekrarlanan Satırlar:\n")
+duplicatedRowsMath <- mathDF[duplicated(mathDF), ]
+duplicatedRowsMath
+cat("\nPortekizce Dersi Tekrarlanan Satırlar:\n")
+duplicatedRowsPortuguese <- portugueseDF[duplicated(portugueseDF), ]
+duplicatedRowsPortuguese
+
+```
+
+# Veri Seti ve Kullanacağımız Verilerle ile ilgili Genel Bilgi
+Veri setini incelediğimizde problem çözümü için kullanacağımız sütunlar, adress_type öğrencinin kırsalda mı yoksa kentte mi yaşadığını hesaplamak için, travel_time okula ulaşım süresini hesaplamak için, internet_access internet erişim bilgisini hesaplamak için, grade 1, grade 2 ve final_grade değerleri ise öğrencinin başarısını hesaplamak için kullanılacaktır.
+
+
+
+
+```{r test_chunk, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+testthat::test_file("tests/Q3_tests_ali_anil_hazar_210401121.R")
+```
