@@ -9,3 +9,7 @@ output:
 # Q1 : Problem Tanımı
 
 Kırsal kesimde yer alan öğrenciler, eğitimde karşılaştıkları zorluklar nedeniyle dezavantajlı bir konumda bulunmaktadır. Eğitim kalitesindeki düşük seviye ve eğitime erişimdeki sorunlar, bu öğrencilerin akademik başarılarını ve genel yaşam kalitelerini olumsuz bir şekilde etkilemektedir. Bu durumun temelinde çeşitli faktörler bulunmaktadır. Kırsal bölgelerdeki eğitimdeki eşitsizlik, ekonomik koşullar, altyapı eksiklikleri ve sosyal faktörler gibi etkenler bir araya gelerek öğrencilerin eğitimine yönelik engeller oluşturmaktadır. Bu kompleks sorunların etkili bir şekilde çözülebilmesi için detaylı bir veri analizi zorunlu hale gelmektedir. Bu analiz, kırsal kesimdeki öğrencilerin eğitim deneyimlerini daha iyi anlamamıza ve çözüm önerileri geliştirmemize olanak tanıyacaktır.
+
+# Q2 : Proje Amacı
+
+Toplumsal bir sorun olarak belirlenen kırsal kesimdeki öğrencilerin eğitimdeki dezavantajlı durumunu ele almak üzere hükümetle ortak bir çalışma başlatılmıştır. Şirketimiz, eğitim ve öğrenci verilerini detaylı bir şekilde analiz ederek bu soruna etkili çözümler üretecektir. Projede ele alınacak çok sayıda faktörün analizi sayesinde, sorunun temel nedenleri belirlenecek ve hükümete sunulacak öneriler, maksimum etki yaratmak ve çözümü en etkili şekilde uygulamak için tasarlanacaktır. Bu kapsamlı analiz, eğitimdeki dezavantajları en aza indirmeyi hedefleyerek, kırsal kesimdeki öğrencilerin akademik ve sosyal hayatlarını olumlu yönde etkilemeyi amaçlamaktadır.
