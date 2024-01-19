@@ -56,8 +56,143 @@ duplicatedRowsPortuguese
 Veri setini incelediğimizde problem çözümü için kullanacağımız sütunlar, adress_type öğrencinin kırsalda mı yoksa kentte mi yaşadığını hesaplamak için, travel_time okula ulaşım süresini hesaplamak için, internet_access internet erişim bilgisini hesaplamak için, grade 1, grade 2 ve final_grade değerleri ise öğrencinin başarısını hesaplamak için kullanılacaktır.
 
 
+# Q4 : Veri Seti Ön işlemesi
+
+## Öğrencilerin Yaşadığı Bölgelerin Dağılımı
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+adress_type <- as.factor(mathDF$address_type)
+adress_freq <- table(adress_type)
+barplot(adress_freq, main = "Address Type Distribution", xlab = "Address Type", ylab = "Frequency", col = "lightblue", border = "black")
+
+```
+
+## Öğrencilerin Eğitime Ulaşım Süresinin Dağılımı
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+factor_travel_time <- as.factor(mathDF$travel_time)
+levels <- levels(factor_travel_time)
+counts <- table(factor_travel_time)
+barplot(counts, main = "Travel Time Distribution", xlab = "Travel Time", ylab = "Frequency", col = "lightblue", border = "black")
+
+
+```
+
+## Öğrencilerin Ders Çalışma Sürelerinin Dağılımları
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+internet_access <- as.factor(mathDF$internet_access)
+internet_freq <- table(internet_access)
+barplot(internet_freq, main = "Internet Access Distribution", xlab = "Internet Access", ylab = "Frequency", col = "lightblue", border = "black")
+```
+
+## Öğrencilerin Ders Çalışma Sürelerinin Dağılımları
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Ders çalışma süresini faktöre çevir
+factor_study_time <- as.factor(mathDF$study_time)
+
+# Faktör seviyelerini sırala
+levels <- levels(factor_study_time)
+
+# Frekansları hesapla
+counts <- table(factor_study_time)
+
+# Barplot oluştur
+barplot(counts, main = "Study Time Distribution", xlab = "Study Time", ylab = "Frequency", col = "lightblue", border = "black")
+```
+
+## Matematik Dersi Not Dağılımları
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+hist(mathDF$grade_1, breaks = 10, main = "1st Term Grade Distribution", xlab = "Grade", ylab = "Frequency", col = "lightblue", border = "black")
+hist(mathDF$grade_2, breaks = 10, main = "2nd Term Grade Distribution", xlab = "Grade", ylab = "Frequency", col = "lightblue", border = "black")
+hist(mathDF$final_grade, breaks = 10, main = "Final Grade Distribution", xlab = "Grade", ylab = "Frequency", col = "lightblue", border = "black")
+
+```
+
+## Portekizce Dersi Not Dağılımları
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+hist(portugueseDF$grade_1, breaks = 10, main = "1st Term Grade Distribution", xlab = "Grade", ylab = "Frequency", col = "lightblue", border = "black")
+hist(portugueseDF$grade_2, breaks = 10, main = "2nd Term Grade Distribution", xlab = "Grade", ylab = "Frequency", col = "lightblue", border = "black")
+hist(portugueseDF$final_grade, breaks = 10, main = "Final Grade Distribution", xlab = "Grade", ylab = "Frequency", col = "lightblue", border = "black")
+
+```
+
+## Veri Ön İşleme Aşamasında Yapılan Filtrelemeler ve Özet Rapor
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Gerekli kütüphaneleri yükle
+library(dplyr)
+library(tibble)
+
+# Veriyi içe aktar
+mathDF <- read_csv("student_math_data.csv")
+portugueseDF <- read_csv("student_portuguese_data.csv")
+
+# 'address_type' sütununu faktöre çevir
+mathDF$address_type <- as.factor(mathDF$address_type)
+portugueseDF$address_type <- as.factor(portugueseDF$address_type)
+
+# 'travel_time' değerlerini temizle ve çevir
+mathDF$travel_time <- gsub("15 to 30 min.", "22", mathDF$travel_time)
+mathDF$travel_time <- gsub("<15 min.", "7", mathDF$travel_time)
+mathDF$travel_time <- as.numeric(gsub(",", ".", mathDF$travel_time))
+
+portugueseDF$travel_time <- gsub("15 to 30 min.", "22", portugueseDF$travel_time)
+portugueseDF$travel_time <- gsub("<15 min.", "7", portugueseDF$travel_time)
+portugueseDF$travel_time <- as.numeric(gsub(",", ".", portugueseDF$travel_time))
+
+# 'study_time' sütununu temizle ve sayısal değere çevir
+mathDF$study_time <- as.numeric(gsub("2 to 5 hours", "4", mathDF$study_time))
+mathDF$study_time <- as.numeric(gsub("5 to 10 hours", "7", mathDF$study_time))
+mathDF$study_time <- as.numeric(gsub("<2 hours", "1", mathDF$study_time))
+mathDF$study_time <- as.numeric(gsub(">10 hours", "12", mathDF$study_time))
+
+portugueseDF$study_time <- as.numeric(gsub("2 to 5 hours", "4", portugueseDF$study_time))
+portugueseDF$study_time <- as.numeric(gsub("5 to 10 hours", "7", portugueseDF$study_time))
+portugueseDF$study_time <- as.numeric(gsub("<2 hours", "1", portugueseDF$study_time))
+portugueseDF$study_time <- as.numeric(gsub(">10 hours", "12", portugueseDF$study_time))
+
+# Belirli değerleri eksik veri olarak gösterenleri NA ile değiştir
+mathDF[mathDF == -999] <- NA
+mathDF[mathDF == "NONE"] <- NA
+
+portugueseDF[portugueseDF == -999] <- NA
+portugueseDF[portugueseDF == "NONE"] <- NA
+
+# Belirli sütunlardaki NA değerlere sahip satırları kaldır (örneğin, 'grade_1' sütunu)
+mathDF <- mathDF[!is.na(mathDF$grade_1), ]
+portugueseDF <- portugueseDF[!is.na(portugueseDF$grade_1), ]
+
+# Ön işlenmiş veri çerçevesini tibble'a çevir
+tibblemathDF <- as_tibble(mathDF)
+tibbleportugueseDF <- as_tibble(portugueseDF)
+
+# 'study_time' sütununu sayısal değere çevir
+tibblemathDF$study_time <- as.numeric(tibblemathDF$study_time)
+tibbleportugueseDF$study_time <- as.numeric(tibbleportugueseDF$study_time)
+
+# Ön işlenmiş tibble'ın ilk altı satırını göster
+cat("Temizlenmiş ve Düzenlenmiş Matematik Dersi Veri Kümesi\n")
+head(tibblemathDF)
+cat("Temizlenmiş ve Düzenlenmiş Portekizce Dersi Veri Kümesi\n")
+head(tibbleportugueseDF)
+
+```
+
+# Özet Rapor
+Veri Dönüştürme: ‘address_type’, ‘travel_time’ ve ‘study_time’ sütunlarındaki değerleri dönüştürüyorsunuz. Bu dönüştürmeler, verilerinizi analiz etmek için daha uygun bir formata getirir.
+
+Eksik Verileri İşleme: Veri setindeki eksik değerleri NA ile değiştiriyorsunuz ve ‘grade_1’ sütununda NA olan satırları kaldırıyorsunuz.
+
+Veri Çerçevesini Tibble’a Dönüştürme: Ön işlenmiş veri çerçevenizi bir tibble’a dönüştürüyorsunuz. Tibble’lar, veri çerçevelerinin daha modern ve kullanıcı dostu bir versiyonudur.
+
+Veri İnceleme: Son olarak, ön işlenmiş tibble’ın ilk altı satırını görüntülüyorsunuz. Bu, veri setinin bir özetini sağlar ve verilerin doğru bir şekilde yüklendiğini ve işlendiğini doğrular.
 
 
 ```{r test_chunk, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-testthat::test_file("tests/Q3_tests_ali_anil_hazar_210401121.R")
+testthat::test_file("tests/Q4_tests_ali_anil_hazar_210401121.R")
 ```
