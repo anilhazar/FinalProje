@@ -193,6 +193,87 @@ Veri Çerçevesini Tibble’a Dönüştürme: Ön işlenmiş veri çerçevenizi 
 Veri İnceleme: Son olarak, ön işlenmiş tibble’ın ilk altı satırını görüntülüyorsunuz. Bu, veri setinin bir özetini sağlar ve verilerin doğru bir şekilde yüklendiğini ve işlendiğini doğrular.
 
 
+
+# Q5 : Veri Mühendisliği
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Kütüphaneleri yükleyelim
+library(ggplot2)
+library(gridExtra)
+
+# Veri setlerini birleştirme (örneğin, student_id üzerinden)
+merged_data <- merge(mathDF, portugueseDF, by = "student_id")
+
+# Her öğrenci için gradelerin ortalamasını hesapla
+merged_data$average_grade <- rowMeans(merged_data[, c("grade_1.x", "grade_2.x", "final_grade.x", "grade_1.y", "grade_2.y", "final_grade.y")])
+
+# Gradeleri ağırlıklandırma
+merged_data$weighted_average_grade <- 0.4 * merged_data$average_grade + 0.3 * ((merged_data$grade_1.x + merged_data$grade_2.x) / 2 + (merged_data$grade_1.y + merged_data$grade_2.y) / 2) / 2
+
+# Weighted_average sütununu numeric formata çevirme ve yuvarlama
+merged_data$weighted_average_grade <- as.integer(round(merged_data$weighted_average_grade))
+
+# Adres türüne göre gruplandırma ve travel_time ile internet_access değerlerinin ortalamalarını hesaplama
+address_type_summary <- merged_data %>%
+  group_by(address_type.x) %>%
+  summarise(avg_travel_time = mean(travel_time.x),
+            avg_internet_access = mean(internet_access.x),
+            avg_study_time = mean(study_time.x))
+
+# Adres türüne göre kırsal ve kentsel öğrencileri ayırma, sadece istenilen sütunları seçme ve dönüşümleri uygulama
+rural_students <- merged_data %>%
+  filter(address_type.x == "Rural") %>%
+  select(student_id, address_type.x, weighted_average_grade, travel_time.x, internet_access.x, study_time.x)
+
+urban_students <- merged_data %>%
+  filter(address_type.x == "Urban") %>%
+  select(student_id, address_type.x, weighted_average_grade, travel_time.x, internet_access.x, study_time.x)
+
+# Her iki kategorideki öğrencilerin başlarını ekrana yazdırma
+cat("Kırsal Bölgede Yaşayan Öğrencilerin Veri Kümesi\n")
+head(rural_students)
+cat("Kentsel Bölgede Yaşayan Öğrencilerin Veri Kümesi\n")
+head(urban_students)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Kütüphaneleri yükleyelim
+library(ggplot2)
+library(gridExtra)
+
+# Kırsal ve kentsel öğrencilerin ağırlıklı not ortalamalarının karşılaştırılması
+plot_weighted_average_grade <- ggplot(merged_data, aes(x = address_type.x, y = weighted_average_grade, fill = address_type.x)) +
+  geom_boxplot() +
+  labs(title = "Weighted Average Grade Comparison", x = "Address Type", y = "Weighted Average Grade") +
+  theme_minimal()
+
+# Kırsal ve kentsel öğrencilerin ulaşımd için geçen sürelerinin karşılaştırılması
+plot_travel_time <- ggplot(merged_data, aes(x = address_type.x, y = travel_time.x, color = address_type.x)) +
+  geom_point(position = position_jitter(width = 0.2), size = 2) +
+  labs(title = "Travel Time Comparison", x = "Address Type", y = "Travel Time") +
+  theme_minimal()
+
+
+# Kırsal ve kentsel öğrencilerin internet erişim durumlarının karşılaştırılması
+plot_internet_access <- ggplot(merged_data, aes(x = address_type.x, fill = internet_access.x)) +
+  geom_bar(stat = "count") +
+  labs(title = "Internet Access Comparison", x = "Address Type", y = "Count") +
+  theme_minimal()
+
+# Kırsal ve kentsel öğrencilerin ortalama çalışma sürelerinin karşılaştırılması
+plot_study_time <- ggplot(merged_data, aes(x = address_type.x, y = study_time.x, color = address_type.x)) +
+  geom_point(position = position_jitter(width = 0.2), size = 2) +
+  labs(title = "Study Time Comparison", x = "Address Type", y = "Study Time") +
+  theme_minimal()
+
+
+# Grafikleri düzenleyerek birleştirelim
+grid.arrange(plot_weighted_average_grade, plot_travel_time, plot_internet_access, plot_study_time, ncol = 2)
+```
+ 
+
+
 ```{r test_chunk, echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-testthat::test_file("tests/Q4_tests_ali_anil_hazar_210401121.R")
+testthat::test_file("tests/Q5_tests_ali_anil_hazar_210401121.R")
 ```
